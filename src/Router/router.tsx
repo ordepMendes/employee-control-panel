@@ -2,8 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import EmployeeList from "../pages/Employee-list";
 import RegisterEmployee from "../pages/Register-employee";
-import ErrorPage from "../pages/Error-page";
 import Login from "../pages/Login";
+import Page404 from "../pages/Page404";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +30,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <ErrorPage />,
+    element: <Page404 />,
   },
 ]);
