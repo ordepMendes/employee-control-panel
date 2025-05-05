@@ -4,6 +4,7 @@ import EmployeeList from "../pages/Employee-list";
 import RegisterEmployee from "../pages/Register-employee";
 import Login from "../pages/Login";
 import Page404 from "../pages/Page404";
+import { PrivateRoute } from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +13,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <App />,
+    element: (
+      <PrivateRoute>
+        <App />
+      </PrivateRoute>
+    ),
     handle: { breadcrumb: "Inicio" },
     children: [
       {
