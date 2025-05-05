@@ -1,12 +1,8 @@
 import { Button } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useGoBack } from "../../hooks/useGoBack";
 
 function Page404() {
-  const navigate = useNavigate();
-
-  const handleGoBack = () => {
-    navigate(-1);
-  };
+  const handleGoBack = useGoBack();
   return (
     <div className="flex h-screen items-center justify-center">
       <div className="flex flex-col items-center justify-center gap-2.5">

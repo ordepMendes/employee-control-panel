@@ -1,12 +1,20 @@
+import { Button } from "antd";
 import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <p>header</p>
-      <Outlet />
-      <p>footer</p>
-    </>
+    <div className="flex min-h-screen items-center justify-center bg-gray-100 p-4">
+      <section className="flex w-full max-w-6xl flex-col gap-4">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-gray-500">Home / Login / Teste</p>
+          <Button type="primary">Adicionar funcionário</Button>
+        </div>
+        <Outlet />
+        <p className="text-center text-gray-400">
+          Desenvolvido por Pedro Mendes
+        </p>
+      </section>
+    </div>
   );
 }
 
