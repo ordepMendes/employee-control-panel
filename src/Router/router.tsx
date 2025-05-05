@@ -13,18 +13,22 @@ export const router = createBrowserRouter([
   {
     path: "/home",
     element: <App />,
+    handle: { breadcrumb: "Inicio" },
     children: [
       {
         index: true,
         element: <EmployeeList />,
+        handle: { breadcrumb: "Home" },
       },
       {
         path: "register-employee",
         element: <RegisterEmployee />,
+        handle: { breadcrumb: "Registrar Funcionario" },
       },
       {
         path: "edit-employee/:id",
         element: <RegisterEmployee />,
+        handle: { breadcrumb: "Editar Funcionario" },
       },
     ],
   },
