@@ -1,8 +1,10 @@
 import { Avatar, Form, Input, DatePicker, Switch, Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { FaUser } from "react-icons/fa";
+import { useGoBack } from "../../hooks/useGoBack";
 
 function RegisterEmployee() {
+  const HandleGoBack = useGoBack();
   return (
     <div className="w-full overflow-x-auto">
       <div className="flex min-w-full items-center justify-center rounded-2xl bg-white p-4">
@@ -76,10 +78,16 @@ function RegisterEmployee() {
           <Form.Item label="Estado" name="estado">
             <Input disabled />
           </Form.Item>
+
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="w-full">
-              Cadastrar Funcionário
-            </Button>
+            <div className="flex justify-end gap-2">
+              <Button type="default" onClick={HandleGoBack}>
+                Retornar
+              </Button>
+              <Button type="primary" htmlType="submit">
+                Cadastrar Funcionário
+              </Button>
+            </div>
           </Form.Item>
         </Form>
       </div>

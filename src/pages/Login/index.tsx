@@ -1,18 +1,28 @@
-import { Input, Button } from "antd";
+import { Input, Button, Form } from "antd";
 import { GoogleOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+  function handleNavigate() {
+    navigate("/home");
+  }
   return (
     <main className="flex min-h-screen items-center justify-center bg-gray-50">
       <section className="w-[320px] rounded-md border border-gray-400 bg-white p-6 shadow-md">
         <h1 className="mb-4 text-center text-2xl font-semibold">Login</h1>
-        <form className="flex flex-col gap-4">
+        <Form className="flex flex-col gap-4">
           <Input placeholder="Email" type="email" />
           <Input.Password placeholder="Senha" />
-          <Button type="primary" htmlType="submit" className="w-full">
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="w-full"
+            onClick={handleNavigate}
+          >
             Entrar
           </Button>
-        </form>
+        </Form>
 
         <div className="my-4 flex items-center gap-2">
           <hr className="flex-grow border-t text-gray-400" />
