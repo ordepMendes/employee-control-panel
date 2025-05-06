@@ -1,4 +1,4 @@
-import { Button, Dropdown, Popconfirm, Space } from "antd";
+import { Button, Dropdown, Space } from "antd";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
 import { LuUserCog } from "react-icons/lu";
@@ -10,13 +10,13 @@ import type { MenuProps } from "antd";
 
 const items: MenuProps["items"] = [
   {
-    key: "2",
+    key: "0",
     label: "Profile",
     icon: <CiUser />,
     disabled: true,
   },
   {
-    key: "4",
+    key: "1",
     label: "Sair",
     icon: <RxExit />,
     onClick: () => signOut(auth),
@@ -51,14 +51,7 @@ function App() {
           <Dropdown menu={{ items }}>
             <a onClick={(e) => e.preventDefault()}>
               <Space className="cursor-pointer">
-                <Popconfirm
-                  title="Logout"
-                  description="Você deseja realmente sair?"
-                  okText="Sim"
-                  cancelText="Não"
-                >
-                  <LuUserCog size={20} />
-                </Popconfirm>
+                <LuUserCog size={20} />
               </Space>
             </a>
           </Dropdown>
