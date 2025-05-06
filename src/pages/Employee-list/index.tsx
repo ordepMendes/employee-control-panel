@@ -6,21 +6,28 @@ const data: DataType[] = [
     name: "John Brown",
     hiring: "12/08/2016",
     email: "khazix@gmail.com",
-    status: ["ativo"],
+    status: "ativo",
   },
   {
     key: "2",
     name: "Jane Doe",
     hiring: "03/11/2018",
     email: "jane.doe@example.com",
-    status: ["ativo"],
+    status: "ativo",
   },
   {
     key: "3",
-    name: "Will Smith",
+    name: "Pedro de Alcântara João Carlos Leopoldo Salvador Bibiano Francisco Xavier de Paula Leocádio Miguel Gabriel Rafael Gonzaga",
     hiring: "07/05/2015",
     email: "will.smith@example.com",
-    status: ["inativo"],
+    status: "inativo",
+  },
+  {
+    key: "4",
+    name: "Pedro Salvador Mendes",
+    hiring: "07/05/2015",
+    email: "will.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasmith@example.com",
+    status: "inativo",
   },
 ];
 

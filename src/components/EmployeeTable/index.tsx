@@ -1,65 +1,99 @@
-import { Space, Table, Tag } from "antd";
+import { Button, Space, Table, Tag, Tooltip } from "antd";
 import type { TableProps } from "antd";
+import { MdEdit, MdDelete } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 export interface DataType {
   key: string;
   name: string;
   hiring: string;
   email: string;
-  status: string[];
+  status: string;
 }
 
 interface EmployeeTableProps {
   data: DataType[];
 }
 
-const columns: TableProps<DataType>["columns"] = [
-  {
-    title: "Nome",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <p className="font-medium">{text}</p>,
-  },
-  {
-    title: "Contratação",
-    dataIndex: "hiring",
-    key: "hiring",
-  },
-  {
-    title: "E-mail",
-    dataIndex: "email",
-    key: "email",
-  },
-  {
-    title: "Status",
-    key: "status",
-    dataIndex: "status",
-    render: (_, { status }) => (
-      <>
-        {status.map((status) => {
-          let color = status === "ativo" ? "green" : "volcano";
-          return (
-            <Tag color={color} key={status}>
-              {status.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: "Ações",
-    key: "action",
-    render: () => (
-      <Space size="middle">
-        <a>Editar</a>
-        <a>Deletar</a>
-      </Space>
-    ),
-  },
-];
-
 const EmployeeTable = ({ data }: EmployeeTableProps) => {
+  const navigate = useNavigate();
+  const editUser = (id: string) => {
+    navigate(`edit-employee/${id}`);
+  };
+
+  const deleteUser = (id: string) => {
+    console.log(`Usuario de id ${id} deletado.`);
+  };
+
+  const columns: TableProps<DataType>["columns"] = [
+    {
+      title: "Nome",
+      dataIndex: "name",
+      key: "name",
+      render: (text) => (
+        <Tooltip title={text}>
+          <p className="font-medium">
+            {text.length > 30 ? `${text.slice(0, 30)}...` : text}
+          </p>
+        </Tooltip>
+      ),
+    },
+    {
+      title: "Contratação",
+      dataIndex: "hiring",
+      key: "hiring",
+    },
+    {
+      title: "E-mail",
+      dataIndex: "email",
+      key: "email",
+      render: (text: string) => {
+        const [local, domain] = text.split("@");
+        const truncatedLocal =
+          local.length > 20 ? `${local.slice(0, 20)}...` : local;
+        const displayEmail = `${truncatedLocal}@${domain}`;
+        return <Tooltip title={text}>{displayEmail}</Tooltip>;
+      },
+    },
+    {
+      title: "Status",
+      key: "status",
+      dataIndex: "status",
+      render: (_, { status }) => {
+        let color = status === "ativo" ? "green" : "volcano";
+        return (
+          <Tag color={color} key={status}>
+            {status.toUpperCase()}
+          </Tag>
+        );
+      },
+    },
+    {
+      title: "Ações",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <Tooltip title="Editar">
+            <Button
+              type="default"
+              onClick={() => editUser(record.key)}
+              shape="circle"
+              icon={<MdEdit />}
+            />
+          </Tooltip>
+          <Tooltip title="Deletar">
+            <Button
+              type="default"
+              danger
+              shape="circle"
+              onClick={() => deleteUser(record.key)}
+              icon={<MdDelete />}
+            />
+          </Tooltip>
+        </Space>
+      ),
+    },
+  ];
   return (
     <Table<DataType>
       columns={columns}

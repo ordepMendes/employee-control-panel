@@ -19,7 +19,7 @@ function Login() {
 
   const openNotificationWithIcon = (type: "error") => {
     api[type]({
-      message: "Error",
+      message: "Erro",
       description: errorMessage,
     });
   };
