@@ -11,7 +11,7 @@ import {
 import { UploadOutlined } from "@ant-design/icons";
 import { FaUser } from "react-icons/fa";
 import { useGoBack } from "../../hooks/useGoBack";
-import apiCep from "../../service/axios/apiCEP";
+import apiCep from "../../service/axios/apiCep.ts";
 import { useState } from "react";
 import dayjs from "dayjs";
 
