@@ -39,6 +39,16 @@ Para acessar o projeto acesse o link: <a href="https://employee-control-panel.ve
 ### 📦 Rodando o projeto localmente
 
 ⚠️ É necessario colocar os arquivos do .env para rodar localmente ⚠️
+```env
+# Configure o env de acordo com as chaves
+
+VITE_FIREBASE_API_KEY= "CHAVE-API"
+VITE_FIREBASE_AUTH_DOMAIN="AUTH-DOMAIN"
+VITE_FIREBASE_PROJECT_ID="PROJECT-ID"
+VITE_FIREBASE_STORAGE_BUCKET="STORAGE-BUCKET"
+VITE_FIREBASE_MESSAGING_SENDER_ID="SENDER-ID"
+VITE_FIREBASE_APP_ID="APP-ID"
+```
 
 Faça um clone do projeto
 ```bash
