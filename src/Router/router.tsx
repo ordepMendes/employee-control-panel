@@ -31,9 +31,9 @@ export const router = createBrowserRouter([
         handle: { breadcrumb: "Registrar Funcionario" },
       },
       {
-        path: "edit-employee/:id",
+        path: "view-employee/:id",
         element: <RegisterEmployee />,
-        handle: { breadcrumb: "Editar Funcionario" },
+        handle: { breadcrumb: "Visualizar Funcionario" },
       },
     ],
   },

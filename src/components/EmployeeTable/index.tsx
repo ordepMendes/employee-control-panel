@@ -1,7 +1,10 @@
 import { Button, Space, Table, Tag, Tooltip } from "antd";
 import type { TableProps } from "antd";
-import { MdEdit, MdDelete } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
+import { IoMdEye } from "react-icons/io";
+
 import { useNavigate } from "react-router-dom";
+import apiEmployee from "../../service/axios/apiEmployee";
 
 export interface DataType {
   key: string;
@@ -13,16 +16,17 @@ export interface DataType {
 
 interface EmployeeTableProps {
   data: DataType[];
+  loading: boolean;
 }
 
-const EmployeeTable = ({ data }: EmployeeTableProps) => {
+const EmployeeTable = ({ data, loading }: EmployeeTableProps) => {
   const navigate = useNavigate();
   const editUser = (id: string) => {
-    navigate(`edit-employee/${id}`);
+    navigate(`view-employee/${id}`);
   };
 
-  const deleteUser = (id: string) => {
-    console.log(`Usuario de id ${id} deletado.`);
+  const deleteUser = async (id: string) => {
+    console.log(id);
   };
 
   const columns: TableProps<DataType>["columns"] = [
@@ -73,12 +77,12 @@ const EmployeeTable = ({ data }: EmployeeTableProps) => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Tooltip title="Editar">
+          <Tooltip title="Visualizar">
             <Button
               type="default"
               onClick={() => editUser(record.key)}
               shape="circle"
-              icon={<MdEdit />}
+              icon={<IoMdEye />}
             />
           </Tooltip>
           <Tooltip title="Deletar">
@@ -100,6 +104,7 @@ const EmployeeTable = ({ data }: EmployeeTableProps) => {
       dataSource={data}
       pagination={{ pageSize: 8 }}
       scroll={{ x: "max-content" }}
+      loading={loading}
     />
   );
 };
