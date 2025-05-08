@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import apiEmployee from "../../service/axios/apiEmployee";
-import { Button, Spin, Tag } from "antd";
+import { Avatar, Button, Spin, Tag } from "antd";
 import { useGoBack } from "../../hooks/useGoBack";
+import { FaUser } from "react-icons/fa";
 
 function DetailsEmployee() {
   const { id } = useParams<{ id: string }>(); // Pega o ID da URL
@@ -37,11 +38,11 @@ function DetailsEmployee() {
 
         {employeeData ? (
           <div className="space-y-4">
-            <div className="flex items-center space-x-4">
-              <img
-                src={employeeData.photo || "/default-photo.jpg"}
-                alt="Foto do Funcionário"
-                className="h-24 w-24 rounded-full object-cover"
+            <div className="flex items-center gap-2.5 space-x-4">
+              <Avatar
+                size={100}
+                src={employeeData.photo || undefined}
+                icon={!employeeData.photo && <FaUser />}
               />
               <div>
                 <h2 className="text-xl font-semibold">{employeeData.name}</h2>

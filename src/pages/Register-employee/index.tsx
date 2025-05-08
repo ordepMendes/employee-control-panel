@@ -7,6 +7,7 @@ import {
   Upload,
   Button,
   message,
+  notification,
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { FaUser } from "react-icons/fa";
@@ -14,6 +15,8 @@ import { useGoBack } from "../../hooks/useGoBack";
 import apiCep from "../../service/axios/apiCep.ts";
 import { useState } from "react";
 import dayjs from "dayjs";
+import apiEmployee from "../../service/axios/apiEmployee.ts";
+import { useNavigate } from "react-router-dom";
 
 type EmployeeDataType = {
   nome: string;
@@ -30,6 +33,7 @@ type EmployeeDataType = {
 };
 
 function RegisterEmployee() {
+  const navigate = useNavigate();
   const HandleGoBack = useGoBack();
   const [employeeData, setEmployeeData] = useState<EmployeeDataType>({
     nome: "",
@@ -44,6 +48,14 @@ function RegisterEmployee() {
     cidade: "",
     estado: "",
   });
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (message: string) => {
+    api.success({
+      message: "Sucesso!",
+      description: message,
+    });
+  };
 
   const [form] = Form.useForm();
   const handleInputChange = (field: keyof EmployeeDataType, value: any) => {
@@ -69,19 +81,42 @@ function RegisterEmployee() {
     }
   };
 
-  const handleSubmit = () => {
-    form
-      .validateFields()
-      .then(() => {
-        console.log("Dados do funcionário:", employeeData);
-      })
-      .catch((errorInfo) => {
-        console.log("Erro de validação:", errorInfo);
-      });
+  const handleSubmit = async () => {
+    try {
+      await form.validateFields();
+
+      const employee = {
+        name: employeeData.nome,
+        email: employeeData.email,
+        status: employeeData.status,
+        photo: employeeData.photo,
+        cpf: employeeData.cpf,
+        data_contracao: new Date(employeeData.data).toISOString(),
+        cep: employeeData.cep,
+        rua: employeeData.rua,
+        bairro: employeeData.bairro,
+        cidade: employeeData.cidade,
+        estado: employeeData.estado,
+      };
+
+      await apiEmployee.post("/add-employee", employee);
+      openNotificationWithIcon("Funcionario cadastrado!");
+      navigate("/home");
+    } catch (error: any) {
+      if (error.response) {
+        message.error(
+          `Erro ao cadastrar: ${error.response.data.message || "Erro na API"}`,
+        );
+      } else {
+        message.error("Erro inesperado ao cadastrar funcionário.");
+      }
+      console.error("Erro no POST:", error);
+    }
   };
 
   return (
     <div className="w-full overflow-x-auto">
+      {contextHolder}
       <div className="flex min-w-full items-center justify-center rounded-2xl bg-white p-4">
         <Form
           form={form}
@@ -94,7 +129,9 @@ function RegisterEmployee() {
               <Avatar
                 size={100}
                 src={employeeData.photo || undefined}
-                icon={!employeeData.photo && <FaUser />}
+                icon={
+                  employeeData.photo != "" ? employeeData.photo : <FaUser />
+                }
               />
               <Upload
                 showUploadList={false}
@@ -166,9 +203,9 @@ function RegisterEmployee() {
           >
             <Input
               value={employeeData.cpf}
-              maxLength={11}
               onChange={(e) => handleInputChange("cpf", e.target.value)}
               type="number"
+              maxLength={11}
             />
           </Form.Item>
 
