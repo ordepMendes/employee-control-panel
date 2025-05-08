@@ -69,3 +69,6 @@ src/
 ├── services/
 └── App.tsx
 ```
+
+### 🔗 Backend
+Este front-end consome a API employee-control-api, que utiliza MongoDB.
