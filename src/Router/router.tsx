@@ -5,6 +5,7 @@ import RegisterEmployee from "../pages/Register-employee";
 import Login from "../pages/Login";
 import Page404 from "../pages/Page404";
 import { PrivateRoute } from "./PrivateRoute";
+import DetailsEmployee from "../pages/Details-employee";
 
 export const router = createBrowserRouter([
   {
@@ -28,11 +29,11 @@ export const router = createBrowserRouter([
       {
         path: "register-employee",
         element: <RegisterEmployee />,
-        handle: { breadcrumb: "Registrar Funcionario" },
+        handle: { breadcrumb: "Cadastrar Funcionario" },
       },
       {
         path: "view-employee/:id",
-        element: <RegisterEmployee />,
+        element: <DetailsEmployee />,
         handle: { breadcrumb: "Visualizar Funcionario" },
       },
     ],
