@@ -1,54 +1,71 @@
-# React + TypeScript + Vite
+# Sistema de Cadastro de Funcionários
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é um projeto front-end desenvolvido em **React** com **TypeScript**, que permite o cadastro, edição e listagem de funcionários, incluindo integração com CEP.
 
-Currently, two official plugins are available:
+### 🚀 Demonstração
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![Badge em produção](http://img.shields.io/static/v1?label=STATUS&message=EM%20PRODUCAO&color=GREEN&style=for-the-badge)
 
-## Expanding the ESLint configuration
+Para acessar o projeto acesse o link: <a href="https://employee-control-panel.vercel.app/">https://employee-control-panel.vercel.app/</a>
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🖥️ Principais tecnologias utilizadas
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Ant Design](https://ant.design/)
+- [React Router](https://reactrouter.com/)
+- [Axios](https://axios-http.com/)
+- [Tailwind](https://tailwindcss.com/)
+
+### 🔨 Funcionalidades
+
+- Cadastro de funcionário com:
+  - Nome, e-mail, CPF, status e data de contratação
+  - Busca automática de endereço via CEP
+  - Upload de imagem de perfil (Base64)
+- Validação de formulário com regras claras
+- Login com autenticação
+- Envio dos dados para API (backend)
+
+### ✅ Requisitos
+
+- `Node`: v18+
+
+### 🔒 Autenticação
+- Autenticação com firebase
+- Login com google
+- Rotas protegidas
+
+### 📦 Rodando o projeto localmente
+
+⚠️ É necessario colocar os arquivos do .env para rodar localmente ⚠️
+
+Faça um clone do projeto
+```bash
+git clone https://github.com/seu-usuario/nome-do-projeto.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Entre na pasta e no terminal rode o comando
+```bash
+# Este comando baixa as dependencias do projeto
+npm install
+```
+Inicie o projeto
+```bash
+# Este comando starta o projeto e gera o link para acessar
+npm run dev
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 📂 Estrutura de Pastas
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+src/
+├── assets/
+├── components/
+├── context/
+├── hooks/
+├── pages/
+├── router/
+├── services/
+└── App.tsx
 ```
