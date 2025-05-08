@@ -6,7 +6,6 @@ import {
   Switch,
   Upload,
   Button,
-  message,
   notification,
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
@@ -51,8 +50,8 @@ function RegisterEmployee() {
   const [api, contextHolder] = notification.useNotification();
 
   const openNotificationWithIcon = (message: string) => {
-    api.success({
-      message: "Sucesso!",
+    api.error({
+      message: "Erro!",
       description: message,
     });
   };
@@ -66,7 +65,7 @@ function RegisterEmployee() {
     try {
       const response = await apiCep.get(`${cep}/json/`);
       if (response.data.erro) {
-        message.error("CEP não encontrado");
+        openNotificationWithIcon("CEP Não encontrado");
         return;
       }
       setEmployeeData((prev) => ({
@@ -77,7 +76,7 @@ function RegisterEmployee() {
         estado: response.data.uf,
       }));
     } catch (error) {
-      message.error("Erro ao buscar o CEP");
+      openNotificationWithIcon("Erro ao buscar  CEP");
     }
   };
 
@@ -100,17 +99,16 @@ function RegisterEmployee() {
       };
 
       await apiEmployee.post("/add-employee", employee);
-      openNotificationWithIcon("Funcionario cadastrado!");
       navigate("/home");
     } catch (error: any) {
       if (error.response) {
-        message.error(
+        openNotificationWithIcon(
           `Erro ao cadastrar: ${error.response.data.message || "Erro na API"}`,
         );
       } else {
-        message.error("Erro inesperado ao cadastrar funcionário.");
+        openNotificationWithIcon("Erro inesperado ao cadastrar funcionário.");
       }
-      console.error("Erro no POST:", error);
+      openNotificationWithIcon("Erro no POST:" + error);
     }
   };
 

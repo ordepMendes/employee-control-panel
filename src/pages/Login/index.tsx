@@ -42,7 +42,7 @@ function Login() {
           "Ocorreu algum erro ao logar com o Google. Espere um momento e tente novamente.",
         );
       }
-      console.log(error.code);
+      openNotificationWithIcon(error.code);
     } finally {
       setLoading(false);
     }
