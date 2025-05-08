@@ -42,7 +42,7 @@ Para acessar o projeto acesse o link: <a href="https://employee-control-panel.ve
 
 Faça um clone do projeto
 ```bash
-git clone https://github.com/seu-usuario/nome-do-projeto.git
+git clone https://github.com/ordepMendes/employee-control-panel.git
 ```
 
 Entre na pasta e no terminal rode o comando
