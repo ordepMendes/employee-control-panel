@@ -4,7 +4,6 @@ import { MdDelete } from "react-icons/md";
 import { IoMdEye } from "react-icons/io";
 
 import { useNavigate } from "react-router-dom";
-import apiEmployee from "../../service/axios/apiEmployee";
 
 export interface DataType {
   key: string;
@@ -17,16 +16,17 @@ export interface DataType {
 interface EmployeeTableProps {
   data: DataType[];
   loading: boolean;
+  onDelete: (id: string) => void;
 }
 
-const EmployeeTable = ({ data, loading }: EmployeeTableProps) => {
+const EmployeeTable = ({ data, loading, onDelete }: EmployeeTableProps) => {
   const navigate = useNavigate();
   const editUser = (id: string) => {
     navigate(`view-employee/${id}`);
   };
 
-  const deleteUser = async (id: string) => {
-    console.log(id);
+  const handleClick = (id: string) => {
+    onDelete(id);
   };
 
   const columns: TableProps<DataType>["columns"] = [
@@ -90,7 +90,7 @@ const EmployeeTable = ({ data, loading }: EmployeeTableProps) => {
               type="default"
               danger
               shape="circle"
-              onClick={() => deleteUser(record.key)}
+              onClick={() => handleClick(record.key)}
               icon={<MdDelete />}
             />
           </Tooltip>

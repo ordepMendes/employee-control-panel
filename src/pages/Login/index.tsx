@@ -11,16 +11,15 @@ import { auth } from "../../service/firebase/firebaseConfig.ts";
 
 function Login() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>("");
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
   const [api, contextHolder] = notification.useNotification();
 
-  const openNotificationWithIcon = (type: "error") => {
-    api[type]({
+  const openNotificationWithIcon = (message: string) => {
+    api.error({
       message: "Erro",
-      description: errorMessage,
+      description: message,
     });
   };
 
@@ -37,14 +36,13 @@ function Login() {
       handleNavigate();
     } catch (error: any) {
       if (error.code === "auth/popup-closed-by-user") {
-        setErrorMessage("Popup fechado pelo usuário.");
+        openNotificationWithIcon("Popup fechado pelo usuário.");
       } else {
-        setErrorMessage(
-          "Ocorreu algum erro ao logar com o google, espere um momento e tente novamente.",
+        openNotificationWithIcon(
+          "Ocorreu algum erro ao logar com o Google. Espere um momento e tente novamente.",
         );
       }
       console.log(error.code);
-      openNotificationWithIcon("error");
     } finally {
       setLoading(false);
     }
@@ -67,27 +65,27 @@ function Login() {
       if (error.errorFields) {
         return;
       }
-      setErrorMessage("Erro ao fazer login. Tente novamente.");
 
       switch (error.code) {
         case "auth/invalid-email":
-          setErrorMessage("E-mail inválido.");
+          openNotificationWithIcon("E-mail inválido.");
           break;
         case "auth/user-disabled":
-          setErrorMessage("Este usuário está desativado.");
+          openNotificationWithIcon("Este usuário está desativado.");
           break;
         case "auth/user-not-found":
-          setErrorMessage("Usuário não encontrado.");
+          openNotificationWithIcon("Usuário não encontrado.");
           break;
         case "auth/invalid-credential":
-          setErrorMessage("E-mail ou senha inválido, tente novamente.");
+          openNotificationWithIcon(
+            "E-mail ou senha inválido, tente novamente.",
+          );
           break;
         default:
-          setErrorMessage(
+          openNotificationWithIcon(
             "Erro desconhecido. Verifique os dados e tente novamente.",
           );
       }
-      openNotificationWithIcon("error");
     } finally {
       setLoading(false);
     }
