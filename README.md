@@ -8,6 +8,11 @@ Este é um projeto front-end desenvolvido em **React** com **TypeScript**, que p
 
 Para acessar o projeto acesse o link: <a href="https://employee-control-panel.vercel.app/">https://employee-control-panel.vercel.app/</a>
 
+Acesso por login e senha
+
+- Email: teste@gmail.com
+- senha: teste123
+
 ### 🖥️ Principais tecnologias utilizadas
 
 - [React](https://reactjs.org/)
